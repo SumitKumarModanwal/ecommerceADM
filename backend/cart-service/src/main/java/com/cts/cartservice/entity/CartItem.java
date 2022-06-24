@@ -10,14 +10,19 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "Cart")
 public class CartItem {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@JsonIgnore
 	private Long cartItemId;
-	@Id
+	@Column(nullable = false)
+	@JsonIgnore
+	private Long userId;
 	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "book_id", referencedColumnName = "bookId")
 	private Book book;
@@ -72,6 +77,14 @@ public class CartItem {
 	public String toString() {
 		return "CartItem [cartItemId=" + cartItemId + ", book=" + book + ", quantity=" + quantity + ", subTotal="
 				+ subTotal + "]";
+	}
+
+	public Long getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Long userId) {
+		this.userId = userId;
 	}
 	
 	

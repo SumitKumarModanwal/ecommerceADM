@@ -1,5 +1,18 @@
 package com.cts.cartservice.service;
 
-public interface CartService {
+import org.springframework.http.ResponseEntity;
 
+import com.cts.cartservice.entity.Book;
+
+public interface CartService {
+	
+	ResponseEntity<?> viewCart();
+	
+	ResponseEntity<?> addToCart( Book book);
+	
+	ResponseEntity<?> updateCartItemQuantity(Long bookId, String action);
+	
+	ResponseEntity<?> removeFromCart(Long bookId);
+	
+	ResponseEntity<?> emptyCart();
 }
