@@ -1,4 +1,4 @@
-package com.cts.orderservice.entity;
+package com.cts.adminservice.entity;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;

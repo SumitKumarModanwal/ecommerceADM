@@ -13,6 +13,8 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "Book")
 public class Book {
@@ -38,6 +40,7 @@ public class Book {
 	@Column(nullable = false)
 	private Integer stock;
 	@Lob
+	@JsonIgnore
 	private Blob image;
 	
 	public Book() {}

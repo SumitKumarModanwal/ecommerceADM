@@ -43,14 +43,18 @@ public class CartServiceImpl implements CartService {
 
 	@Override
 	public ResponseEntity<?> addToCart(Book book) {
-		CartItem cartItem = new CartItem();
-		cartItem.setUserId(sessionUserId);
-		cartItem.setBook(book);
-		cartItem.setQuantity(1);
-		cartItem.setSubTotal(book.getPrice());
+		boolean isItemAlreadyPresentInCart = repository.findByBookIdAndUserId(book.getBookId(), sessionUserId) != null;
+		if(!isItemAlreadyPresentInCart) {
+			CartItem cartItem = new CartItem();
+			cartItem.setUserId(sessionUserId);
+			cartItem.setBook(book);
+			cartItem.setQuantity(1);
+			cartItem.setSubTotal(book.getPrice());
+			repository.save(cartItem);
+			return new ResponseEntity<CartItem>(cartItem, HttpStatus.CREATED);
+		}
 
-		repository.save(cartItem);
-		return new ResponseEntity<CartItem>(cartItem, HttpStatus.CREATED);
+		return new ResponseEntity( HttpStatus.BAD_REQUEST);
 
 	}
 

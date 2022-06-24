@@ -1,4 +1,4 @@
-package com.cts.orderservice.entity;
+package com.cts.adminservice.entity;
 
 import java.sql.Timestamp;
 import java.util.List;

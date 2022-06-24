@@ -13,16 +13,16 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name = "OrderItem")
-public class OrderItem {
+@Table(name = "Cart")
+public class CartItem {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@JsonIgnore
-	private Long orderItemId;
+	private Long cartItemId;
 	@Column(nullable = false)
 	@JsonIgnore
-	private Long orderId;
+	private Long userId;
 	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "book_id", referencedColumnName = "bookId")
 	private Book book;
@@ -31,31 +31,22 @@ public class OrderItem {
 	@Column(nullable = false)
 	private Integer subTotal;
 	
-	public OrderItem() {}
+	public CartItem() {}
 	
-	public OrderItem(Long orderItemId,Long orderId, Book book, Integer quantity, Integer subTotal) {
+	public CartItem(Long cartItemId, Book book, Integer quantity, Integer subTotal) {
 		super();
-		this.orderItemId = orderItemId;
-		this.orderId = orderId;
+		this.cartItemId = cartItemId;
 		this.book = book;
 		this.quantity = quantity;
 		this.subTotal = subTotal;
 	}
 
-	public Long getOrderId() {
-		return orderId;
+	public Long getCartItemId() {
+		return cartItemId;
 	}
 
-	public void setOrderId(Long orderId) {
-		this.orderId = orderId;
-	}
-
-	public Long getOrderItemId() {
-		return orderItemId;
-	}
-
-	public void setOrderItemId(Long orderItemId) {
-		this.orderItemId = orderItemId;
+	public void setCartItemId(Long cartItemId) {
+		this.cartItemId = cartItemId;
 	}
 
 	public Book getBook() {
@@ -84,10 +75,19 @@ public class OrderItem {
 
 	@Override
 	public String toString() {
-		return "OrderItem [orderItemId=" + orderItemId + ", orderId=" + orderId + ", book=" + book + ", quantity="
-				+ quantity + ", subTotal=" + subTotal + "]";
+		return "CartItem [cartItemId=" + cartItemId + ", book=" + book + ", quantity=" + quantity + ", subTotal="
+				+ subTotal + "]";
 	}
 
+	public Long getUserId() {
+		return userId;
+	}
 
-
+	public void setUserId(Long userId) {
+		this.userId = userId;
+	}
+	
+	
+	
+	
 }
