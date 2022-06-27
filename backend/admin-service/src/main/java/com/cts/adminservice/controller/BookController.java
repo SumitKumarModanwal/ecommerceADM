@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cts.adminservice.AdminServiceApplication;
 import com.cts.adminservice.entity.Book;
 import com.cts.adminservice.service.BookService;
 
@@ -25,12 +24,12 @@ public class BookController {
 	@Autowired
 	private BookService bookService;
 	
-	@GetMapping("/")
+	@GetMapping("")
 	public ResponseEntity<?> getInventory() {
 		return bookService.getInventory();
 	}
 	
-	@PostMapping("/")
+	@PostMapping("")
 	public ResponseEntity<?> addBookToInventory(@RequestBody Book book){
 		LOGGER.warn(book.toString());
 		return bookService.addBookToInventory(book);

@@ -24,7 +24,7 @@ public class CategoryController {
 	@Autowired
 	private CategoryService categoryService;
 	
-	@PostMapping("/")
+	@PostMapping("")
 	public ResponseEntity<?> addCategory(@RequestBody Category category){
 		LOGGER.warn(category.toString());
 		return categoryService.addCategory(category);

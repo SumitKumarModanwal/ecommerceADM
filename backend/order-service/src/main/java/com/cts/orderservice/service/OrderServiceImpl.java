@@ -53,7 +53,7 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public ResponseEntity<?> placeOrder() {
 		// get cart object from cart-service
-		ResponseEntity<?> getCartResponse = restTemplate.getForEntity("http://localhost:8080/cart/", Cart.class);
+		ResponseEntity<?> getCartResponse = restTemplate.getForEntity("http://localhost:8080/cart", Cart.class);
 		if(getCartResponse.getStatusCodeValue() == 200) {
 			Cart cart = (Cart)getCartResponse.getBody();
 			// create order description object to generate orderId

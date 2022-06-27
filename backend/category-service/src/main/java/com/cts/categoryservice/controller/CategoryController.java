@@ -20,7 +20,7 @@ public class CategoryController {
 	@Autowired
 	private CategoryService categoryService;
 	
-	@GetMapping("/")
+	@GetMapping("")
 	public ResponseEntity<?> getAllCategories(){
 		return categoryService.getAllCategories();
 	}

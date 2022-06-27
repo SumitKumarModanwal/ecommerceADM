@@ -11,23 +11,23 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cts.adminservice.service.OrderService;
 
 @RestController
-@RequestMapping("/admin")
+@RequestMapping("/admin/orders")
 public class OrderController {
 
 	@Autowired
 	private OrderService service;
 	
-	@GetMapping("/orders")
+	@GetMapping("")
 	public ResponseEntity<?> getAllUndeliveredOrders() {
 		return service.getAllUndeliveredOrders();
 	}
 	
-	@GetMapping("/orders/{orderId}")
+	@GetMapping("/{orderId}")
 	public ResponseEntity<?> getOrderDetails(@PathVariable("orderId") Long orderId) {
 		return service.getOrderDetails(orderId);
 	}
 	
-	@PutMapping("/orders/{orderId}")
+	@PutMapping("/{orderId}")
 	public ResponseEntity<?> updateDeliveryStatus(@PathVariable("orderId") Long orderId){
 		return service.updateDeliveryStatus(orderId);
 	}

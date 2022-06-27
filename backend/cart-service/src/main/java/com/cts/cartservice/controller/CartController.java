@@ -25,12 +25,12 @@ public class CartController {
 	@Autowired
 	private CartService service;
 	
-	@GetMapping("/")
+	@GetMapping("")
 	public ResponseEntity<?> viewCart(){
 		return service.viewCart();
 	}
 	
-	@PostMapping("/")
+	@PostMapping("")
 	public ResponseEntity<?> addToCart(@RequestBody Book book){
 		return service.addToCart(book);
 	}
@@ -46,7 +46,7 @@ public class CartController {
 		return service.removeFromCart(bookId);
 	}
 	
-	@DeleteMapping("/")
+	@DeleteMapping("")
 	public ResponseEntity<?> emptyCart(){
 		return service.emptyCart();
 	}
