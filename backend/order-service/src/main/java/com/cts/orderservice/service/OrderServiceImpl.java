@@ -16,6 +16,7 @@ import com.cts.orderservice.entity.Cart;
 import com.cts.orderservice.entity.CartItem;
 import com.cts.orderservice.entity.Order;
 import com.cts.orderservice.entity.OrderItem;
+import com.cts.orderservice.entity.OrderStatus;
 import com.cts.orderservice.repository.OrderItemRepository;
 import com.cts.orderservice.repository.OrderRepository;
 
@@ -74,8 +75,8 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public ResponseEntity<?> cancelOrder(Long orderId) {
 		Order order = orderRepository.findByOrderIdAndUserId(orderId, sessionUserId);
-		if(order != null && !order.isDelivered() && !order.isCancelled()) {
-			order.setCancelled(true);
+		if(order != null) {
+			order.setStatus(OrderStatus.CANCELLED.toString());
 			orderRepository.save(order);
 			return new ResponseEntity<Order>(order, HttpStatus.NO_CONTENT);
 		}

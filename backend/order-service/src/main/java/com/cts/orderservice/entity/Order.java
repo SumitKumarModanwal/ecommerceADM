@@ -28,26 +28,21 @@ public class Order {
 	@Transient
 	@JsonInclude
 	private List<OrderItem> bookList;
-	private boolean isDelivered;
-	private boolean isCancelled;
+	private String status;
 	private Integer total;
 	
 	public Order() {
 		this.orderDate = new Timestamp(System.currentTimeMillis());
-		this.isDelivered = false;
-		this.isCancelled = false;
 	}
 	
 
-	public Order(Long orderId, Long userId, Timestamp orderDate, List<OrderItem> bookList, boolean isDelivered,
-			boolean isCancelled, Integer total) {
+	public Order(Long orderId, Long userId, Timestamp orderDate, List<OrderItem> bookList, String status, Integer total) {
 		super();
 		this.orderId = orderId;
 		this.userId = userId;
 		this.orderDate = orderDate;
 		this.bookList = bookList;
-		this.isDelivered = isDelivered;
-		this.isCancelled = isCancelled;
+		this.status = status;
 		this.total = total;
 	}
 
@@ -83,15 +78,6 @@ public class Order {
 	public void setBookList(List<OrderItem> bookList) {
 		this.bookList = bookList;
 	}
-
-	public boolean isDelivered() {
-		return isDelivered;
-	}
-
-	public void setDelivered(boolean isDelivered) {
-		this.isDelivered = isDelivered;
-	}
-
 	public Integer getTotal() {
 		return total;
 	}
@@ -100,20 +86,22 @@ public class Order {
 		this.total = total;
 	}
 
-	public boolean isCancelled() {
-		return isCancelled;
+
+	public String getStatus() {
+		return status;
 	}
 
-	public void setCancelled(boolean isCancelled) {
-		this.isCancelled = isCancelled;
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 
 	@Override
 	public String toString() {
 		return "Order [orderId=" + orderId + ", userId=" + userId + ", orderDate=" + orderDate + ", bookList="
-				+ bookList + ", isDelivered=" + isDelivered + ", isCancelled=" + isCancelled + ", total=" + total + "]";
+				+ bookList + ", status=" + status + ", total=" + total + "]";
 	}
-	
+
 
 }
