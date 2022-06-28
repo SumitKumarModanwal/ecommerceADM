@@ -1,0 +1,26 @@
+  <p>
+    <mat-toolbar color="accent">
+      <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span class="spacer">
+        <a mat-icon-button routerLink="/home">Book Store</a>
+      </span>
+      <span >
+        <a *ngIf="!loggedIn" mat-icon-button routerLink="/login">Login</a>
+      </span>
+      <span >
+        <a *ngIf="loggedIn" mat-icon-button  >User</a>
+      </span>
+      <span >
+        <a *ngIf="loggedIn" mat-icon-button (click)="logoutUser()" >Logout</a>
+      </span>
+      <span >
+        <a *ngIf="!loggedIn" routerLink="/register" mat-icon-button (click)="registerUser()" >Register</a>
+      </span>
+      
+  
+    </mat-toolbar>
+  </p>
+  
+  
