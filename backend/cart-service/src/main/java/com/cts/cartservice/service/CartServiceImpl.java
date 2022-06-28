@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.cts.cartservice.CartServiceApplication;
 import com.cts.cartservice.entity.Book;
 import com.cts.cartservice.entity.Cart;
+import com.cts.cartservice.entity.CartAction;
 import com.cts.cartservice.entity.CartItem;
 import com.cts.cartservice.repository.CartRepository;
 
@@ -43,8 +44,8 @@ public class CartServiceImpl implements CartService {
 
 	@Override
 	public ResponseEntity<?> addToCart(Book book) {
-		boolean isItemAlreadyPresentInCart = repository.findByBookIdAndUserId(book.getBookId(), sessionUserId) != null;
-		if(!isItemAlreadyPresentInCart) {
+		CartItem item = repository.findByBookIdAndUserId(book.getBookId(), sessionUserId);
+		if(item == null) {
 			CartItem cartItem = new CartItem();
 			cartItem.setUserId(sessionUserId);
 			cartItem.setBook(book);
@@ -52,9 +53,9 @@ public class CartServiceImpl implements CartService {
 			cartItem.setSubTotal(book.getPrice());
 			repository.save(cartItem);
 			return new ResponseEntity<CartItem>(cartItem, HttpStatus.CREATED);
+		} else  {
+			return updateCartItemQuantity(item.getBook().getBookId(), CartAction.ADD.name());
 		}
-
-		return new ResponseEntity( HttpStatus.BAD_REQUEST);
 
 	}
 
@@ -62,11 +63,11 @@ public class CartServiceImpl implements CartService {
 	public ResponseEntity<?> updateCartItemQuantity(Long bookId, String action) {
 		CartItem cartItem = repository.findByBookIdAndUserId(bookId, sessionUserId);
 		if(cartItem != null) {
-			if(action.equals("ADD")) {
+			if(action.equals(CartAction.ADD.name())) {
 				cartItem.setQuantity(cartItem.getQuantity() + 1);
 				repository.save(cartItem);
 				return new ResponseEntity(HttpStatus.OK);
-			} else if(action.equals("REMOVE")) {
+			} else if(action.equals(CartAction.REMOVE.name())) {
 				cartItem.setQuantity(cartItem.getQuantity() - 1);
 				repository.save(cartItem);
 				return new ResponseEntity(HttpStatus.OK);

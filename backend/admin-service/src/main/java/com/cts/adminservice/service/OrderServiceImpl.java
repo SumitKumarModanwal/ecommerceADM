@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.cts.adminservice.AdminServiceApplication;
 import com.cts.adminservice.entity.Order;
+import com.cts.adminservice.entity.OrderStatus;
 import com.cts.adminservice.repository.OrderItemRepository;
 import com.cts.adminservice.repository.OrderRepository;
 
@@ -42,12 +43,16 @@ public class OrderServiceImpl implements OrderService {
 	}
 	
 	@Override
-	public ResponseEntity<?> updateDeliveryStatus(Long orderId) {
+	public ResponseEntity<?> updateDeliveryStatus(Long orderId, String orderStatus) {
 		Optional<Order> order = orderRepository.findById(orderId);
 		if(!order.isEmpty()) {
-			order.get().setDelivered(true);
-			orderRepository.save(order.get());
-			return new ResponseEntity( HttpStatus.OK);
+			for(OrderStatus status : OrderStatus.values()) {
+				if(orderStatus.equals(status.toString())) {
+					order.get().setStatus(orderStatus);
+					orderRepository.save(order.get());
+					return new ResponseEntity( HttpStatus.OK);
+				}
+			}
 		}
 		return new ResponseEntity(HttpStatus.BAD_REQUEST);
 	}

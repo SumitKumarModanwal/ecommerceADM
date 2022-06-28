@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -24,7 +25,7 @@ public class CategoryController {
 	@Autowired
 	private CategoryService categoryService;
 	
-	@PostMapping("/")
+	@PostMapping("")
 	public ResponseEntity<?> addCategory(@RequestBody Category category){
 		LOGGER.warn(category.toString());
 		return categoryService.addCategory(category);
@@ -38,5 +39,15 @@ public class CategoryController {
 	@DeleteMapping("/{categoryId}")
 	public ResponseEntity<?> removeCategory(@PathVariable("categoryId") Long categoryId){
 		return categoryService.deleteCategory(categoryId);
+	}
+	
+	@GetMapping("")
+	public ResponseEntity<?> getAllCategories(){
+		return categoryService.getAllCategories();
+	}
+	
+	@GetMapping("/{categoryId}")
+	public ResponseEntity<?> getCategoryById(@PathVariable("categoryId") Long categoryId){
+		return categoryService.getCategoryById(categoryId);
 	}
 }

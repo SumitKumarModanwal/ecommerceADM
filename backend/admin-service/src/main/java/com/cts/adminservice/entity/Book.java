@@ -30,7 +30,6 @@ public class Book {
 	private String author;
 	@Column(nullable = false)
 	private String publication;
-	@Column(nullable = false)
 	private String description;
 	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "category_id", referencedColumnName = "categoryId")

@@ -8,6 +8,6 @@ public interface OrderService {
 
 	ResponseEntity<?> getOrderDetails(Long orderId);
 	
-	ResponseEntity<?> updateDeliveryStatus(Long orderId);
+	ResponseEntity<?> updateDeliveryStatus(Long orderId, String orderStatus);
 
 }

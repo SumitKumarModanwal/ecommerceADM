@@ -16,6 +16,7 @@ import com.cts.orderservice.entity.Cart;
 import com.cts.orderservice.entity.CartItem;
 import com.cts.orderservice.entity.Order;
 import com.cts.orderservice.entity.OrderItem;
+import com.cts.orderservice.entity.OrderStatus;
 import com.cts.orderservice.repository.OrderItemRepository;
 import com.cts.orderservice.repository.OrderRepository;
 
@@ -53,7 +54,7 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public ResponseEntity<?> placeOrder() {
 		// get cart object from cart-service
-		ResponseEntity<?> getCartResponse = restTemplate.getForEntity("http://localhost:8080/cart/", Cart.class);
+		ResponseEntity<?> getCartResponse = restTemplate.getForEntity("http://localhost:8080/cart", Cart.class);
 		if(getCartResponse.getStatusCodeValue() == 200) {
 			Cart cart = (Cart)getCartResponse.getBody();
 			// create order description object to generate orderId
@@ -74,8 +75,8 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public ResponseEntity<?> cancelOrder(Long orderId) {
 		Order order = orderRepository.findByOrderIdAndUserId(orderId, sessionUserId);
-		if(order != null && !order.isDelivered() && !order.isCancelled()) {
-			order.setCancelled(true);
+		if(order != null) {
+			order.setStatus(OrderStatus.CANCELLED.toString());
 			orderRepository.save(order);
 			return new ResponseEntity<Order>(order, HttpStatus.NO_CONTENT);
 		}
