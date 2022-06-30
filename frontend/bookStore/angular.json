@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "bookStore": {
+    "progfront": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:application": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/book-store",
+            "outputPath": "dist/progfront",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -27,8 +27,10 @@
               "src/assets"
             ],
             "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/purple-green.css",
-              "src/styles.css"
+              "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
+              "src/styles.css",
+              "./node_modules/bootstrap-grid-only-css/dist/css/bootstrap-grid.min.css"
+      
             ],
             "scripts": []
           },
@@ -69,10 +71,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "bookStore:build:production"
+              "browserTarget": "progfront:build:production"
             },
             "development": {
-              "browserTarget": "bookStore:build:development"
+              "browserTarget": "progfront:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -80,7 +82,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "bookStore:build"
+            "browserTarget": "progfront:build"
           }
         },
         "test": {
@@ -95,8 +97,9 @@
               "src/assets"
             ],
             "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/purple-green.css",
+              "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
               "src/styles.css"
+              
             ],
             "scripts": []
           }
@@ -104,5 +107,5 @@
       }
     }
   },
-  "defaultProject": "bookStore"
+  "defaultProject": "progfront"
 }

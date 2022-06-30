@@ -1,0 +1,45 @@
+/* .full-width{
+    width: 100%;
+}
+.ml10{
+    margin-left:10px ;
+}
+.mr10{
+    margin-right:10px ;
+}
+.mt10{
+    margin-top:10px ;
+}
+.mb10{
+    margin-bottom:10px ;
+} */
+
+
+.text-center{
+    text-align: center;
+}
+.mt{
+    margin-top: 10px;
+}
+.full-width{
+    width: 100%;
+}
+.mt1{
+    margin-top: 10px;
+}
+.bg{
+    background-color: #caedca;
+}
+.bg1{
+    background-color: #d5f6d5;
+}
+.bg2{
+    background-color: #f3a3e3;
+}
+.mb{
+    margin-bottom: 10px;
+}
+.mat-radio-button ~ .mat-radio-button {
+    margin-left: 16px;
+  }
+  

@@ -1,26 +1,50 @@
-  <p>
-    <mat-toolbar color="accent">
-      <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-        <mat-icon>menu</mat-icon>
-      </button>
-      <span class="spacer">
-        <a mat-icon-button routerLink="/home">Book Store</a>
-      </span>
-      <span >
-        <a *ngIf="!loggedIn" mat-icon-button routerLink="/login">Login</a>
-      </span>
-      <span >
-        <a *ngIf="loggedIn" mat-icon-button  >User</a>
-      </span>
-      <span >
-        <a *ngIf="loggedIn" mat-icon-button (click)="logoutUser()" >Logout</a>
-      </span>
-      <span >
-        <a *ngIf="!loggedIn" routerLink="/register" mat-icon-button (click)="registerUser()" >Register</a>
-      </span>
-      
-  
-    </mat-toolbar>
-  </p>
-  
-  
+<div class="bootstrap-wrapper">
+  <div class="container-fluid pdr0 pdl0">
+    <div class="row">
+      <mat-toolbar color="primary">
+        <!--Home-->
+        <div class="col">
+          <a routerLink="" mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+            <mat-icon>home</mat-icon>
+          </a>
+        </div>
+        <div class="col">
+          <span class="span-center">BookStore</span>
+        </div>
+
+        <div class="col" style="text-align:end ;">
+          <!--Login-->  
+          <a 
+          *ngIf="!isLoggedIn"
+          routerLink="/login" mat-icon-button class="example-icon favorite-icon"
+            aria-label="Example icon-button with heart icon">
+            Login
+          </a>
+          <!--Signup-->    
+          <a 
+          *ngIf="!isLoggedIn"
+          [routerLink]="'/signup'" mat-icon-button class="example-icon mr10 ml10"
+            aria-label="Example icon-button with share icon ">
+            Register
+          </a>
+          <!--Log Out-->
+          
+          <a 
+          (click) ='logout()'
+          *ngIf="isLoggedIn"
+          [routerLink]="'/signup'" mat-icon-button class="example-icon mr10 ml10"
+            aria-label="Example icon-button with share icon ">
+            Log Out
+          </a>
+          <a
+          *ngIf="isLoggedIn && user"
+          mat-icon-button class="example-icon mr10 ml10"
+            aria-label="Example icon-button with share icon ">
+            {{login.getUser().username}}
+
+          </a>
+        </div>
+      </mat-toolbar>
+    </div>
+  </div>
+</div>

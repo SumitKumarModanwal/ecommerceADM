@@ -1,16 +1,19 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import baseUrl from './helper';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  baseurl="http://localhost:9595";
+  constructor(
+    private http:HttpClient
+  ) { }
 
-  constructor(private http:HttpClient) { }
 
-  getUser(){
-    return this.http.get(`${this.baseurl}/getusers`)
+  //addEmployee
+  public addEmployee(emp : any){
+    return this.http.post(`${baseUrl}user/`,emp);
   }
 }

@@ -4,47 +4,51 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatFormFieldModule} from '@angular/material/form-field'
-import { MatInputModule} from '@angular/material/input'
-import { MatToolbarModule} from '@angular/material/toolbar';
-import {MatCardModule} from '@angular/material/card'
-import { FormsModule } from '@angular/forms';
-import { MatButtonModule} from '@angular/material/button';
-import { HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
+import { MatButtonModule } from '@angular/material/button';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { LoginComponent } from './components/login/login.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { HomeComponent } from './components/home/home.component';
-import {MatIconModule} from '@angular/material/icon';
-import { LoginService } from './services/login.service';
-import { AuthGuard } from './services/auth.guard';
-import { AuthInterceptor } from './services/auth.interceptor';
-import { RegisterComponent } from './components/register/register.component';
-import {MatRadioModule} from '@angular/material/radio';
+import { FooterComponent } from './components/footer/footer.component';
+import { SignupComponent } from './pages/signup/signup.component'; 
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field'; 
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { LoginComponent } from './pages/login/login.component';
+import { HomeComponent } from './pages/home/home.component'; 
+import { MatToolbarModule } from '@angular/material/toolbar'; 
+import { MatIconModule } from '@angular/material/icon'; 
+import { MatCardModule } from '@angular/material/card'; 
+import { AuthInterceptor, authInterceptorProviders } from './services/auth.interceptor';
+import { DashboardComponent } from './pages/admin/dashboard/dashboard.component';
+import { UserDashboardComponent } from './pages/employee/user-dashboard/user-dashboard.component';
+import { AdminGuard } from './services/admin.guard';
+
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
+    FooterComponent,
+    SignupComponent,
     LoginComponent,
-    DashboardComponent,
     HomeComponent,
-    RegisterComponent
+    DashboardComponent,
+    UserDashboardComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule,
-    HttpClientModule,
     BrowserAnimationsModule,
     MatButtonModule,
-    MatToolbarModule,
     MatInputModule,
     MatFormFieldModule,
-    MatCardModule,
+    FormsModule,
+    HttpClientModule,
+    MatSnackBarModule,
+    MatToolbarModule,
     MatIconModule,
-    MatRadioModule
+    MatCardModule,
   ],
-  providers: [LoginService,AuthGuard,[{provide:HTTP_INTERCEPTORS,useClass:AuthInterceptor,multi:true}]],
+  providers: [AdminGuard,[{ provide:HTTP_INTERCEPTORS,useClass:AuthInterceptor,multi:true}]],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

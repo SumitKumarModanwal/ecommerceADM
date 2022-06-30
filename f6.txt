@@ -1,2 +1,0 @@
-sixth
-altering f6 from local and pushing to remote repo
