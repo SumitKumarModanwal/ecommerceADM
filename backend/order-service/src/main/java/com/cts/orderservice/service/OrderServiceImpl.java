@@ -31,6 +31,8 @@ public class OrderServiceImpl implements OrderService {
 	@Autowired
 	private RestTemplate restTemplate;
 	
+	private static final String CART_URL = "http://CART-SERVICE/cart";
+	
 	private Long sessionUserId = 16L;
 	
 	@Override
@@ -54,7 +56,7 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public ResponseEntity<?> placeOrder() {
 		// get cart object from cart-service
-		ResponseEntity<?> getCartResponse = restTemplate.getForEntity("http://localhost:8080/cart", Cart.class);
+		ResponseEntity<?> getCartResponse = restTemplate.getForEntity(CART_URL, Cart.class);
 		if(getCartResponse.getStatusCodeValue() == 200) {
 			Cart cart = (Cart)getCartResponse.getBody();
 			// create order description object to generate orderId
@@ -67,7 +69,7 @@ public class OrderServiceImpl implements OrderService {
 			// save orderItems into database
 			orderItemRepository.saveAll(order.getBookList());
 			// empty cart 
-			restTemplate.delete("http://localhost:8080/cart/");
+			restTemplate.delete(CART_URL);
 			return new ResponseEntity<Order>(order, HttpStatus.CREATED);
 		}
 		return new ResponseEntity(HttpStatus.BAD_REQUEST);

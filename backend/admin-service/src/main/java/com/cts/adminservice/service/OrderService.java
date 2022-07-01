@@ -4,7 +4,7 @@ import org.springframework.http.ResponseEntity;
 
 public interface OrderService {
 
-	ResponseEntity<?> getAllUndeliveredOrders();
+	ResponseEntity<?> getOrders(String status, Integer pageNumber);
 
 	ResponseEntity<?> getOrderDetails(Long orderId);
 	

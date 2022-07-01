@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cts.adminservice.service.OrderService;
@@ -19,8 +20,8 @@ public class OrderController {
 	private OrderService service;
 	
 	@GetMapping("")
-	public ResponseEntity<?> getAllUndeliveredOrders() {
-		return service.getAllUndeliveredOrders();
+	public ResponseEntity<?> getOrders(@RequestParam("status") String status,@RequestParam("page") Integer pageNumber) {
+		return service.getOrders(status, pageNumber);
 	}
 	
 	@GetMapping("/{orderId}")
@@ -29,7 +30,7 @@ public class OrderController {
 	}
 	
 	@PutMapping("/{orderId}")
-	public ResponseEntity<?> updateDeliveryStatus(@PathVariable("orderId") Long orderId, @RequestBody String orderStatus){
-		return service.updateDeliveryStatus(orderId, orderStatus);
+	public ResponseEntity<?> updateDeliveryStatus(@PathVariable("orderId") Long orderId, @RequestBody String status){
+		return service.updateDeliveryStatus(orderId, status);
 	}
 }

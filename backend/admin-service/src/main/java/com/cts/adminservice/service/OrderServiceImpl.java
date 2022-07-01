@@ -25,8 +25,13 @@ public class OrderServiceImpl implements OrderService {
 	@Autowired
 	private OrderItemRepository orderItemRepository;
 	@Override
-	public ResponseEntity<?> getAllUndeliveredOrders() {
-		List<Order> orderList = orderRepository.findAllUndeliveredOrders();
+	public ResponseEntity<?> getOrders(String status, Integer pageNumber) {
+		List<Order> orderList;
+		if(status.equals("ALL")) {
+			orderList = orderRepository.findOrders(pageNumber - 1);
+		} else {
+			orderList = orderRepository.findOrdersByStatus(status, pageNumber - 1);
+		}
 		return new ResponseEntity<List<Order>>(orderList,HttpStatus.OK);
 	}
 	@Override
