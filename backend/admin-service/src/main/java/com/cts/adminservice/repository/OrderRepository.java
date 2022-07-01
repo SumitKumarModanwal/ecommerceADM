@@ -10,7 +10,10 @@ import com.cts.adminservice.entity.Order;
 
 @Repository
 public interface OrderRepository extends JpaRepository<Order, Long>{
+	
+	@Query(value = "SELECT * FROM order_description LIMIT 10 OFFSET ?", nativeQuery = true)
+	List<Order> findOrders(Integer pageNumber);
 
-	@Query(value = "SELECT * FROM order_description WHERE is_delivered=0 AND is_cancelled=0", nativeQuery = true)
-	List<Order> findAllUndeliveredOrders();
+	@Query(value = "SELECT * FROM order_description WHERE status=?1 LIMIT 10 OFFSET ?2", nativeQuery = true)
+	List<Order> findOrdersByStatus(String status, Integer pageNumber);
 }
