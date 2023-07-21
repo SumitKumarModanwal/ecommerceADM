@@ -18,6 +18,8 @@ public class AdminServiceApplication {
 	@Bean
 	@LoadBalanced
 	public RestTemplate restTemplate() {
+
+		System.out.println("Rest Template")
 		return new RestTemplate();
 	}
 
